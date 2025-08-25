@@ -9,16 +9,19 @@ import Accordion from "./Components/Accordion";
 import Client from "./Components/Client";
 import Footeer from "./Components/Footeer";
 
-function App() {
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Dash_layout from "./Dash_lay/Real_estate/Layout/Dash_layout";
+import Real from "./Dash_lay/Real_estate/Real";
+
+function HomePage() {
   return (
     <div>
       <Navbar />
       <div className="pt-28">
         <Hero />
       </div>
-
       <Stats />
-
       <Logoscroll />
       <Stage />
       <Vision />
@@ -26,6 +29,22 @@ function App() {
       <Client />
       <Footeer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Home */}
+        <Route path="/" element={<HomePage />} />
+
+        {/* Real Estate Routes */}
+        <Route path="/real-estate" element={<Dash_layout />}>
+          <Route index element={<Real />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

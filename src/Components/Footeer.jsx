@@ -28,14 +28,14 @@ const Footer = () => {
 
           <div className="flex space-x-4">
             <div className="flex space-x-4 my-4 md:my-0 text-white text-xl">
-              <div className="w-14 h-14 flex items-center justify-center rounded-full border-2 border-white mb-4">
-                <FaFacebookF className="cursor-pointer hover:text-white hover:bg-[#1877F2]" />
+              <div className="w-14 h-14 flex items-center justify-center rounded-full border-2 hover:bg-[#1877F2] border-white mb-4">
+                <FaFacebookF className="cursor-pointer hover:text-white " />
               </div>
-              <div className="w-14 h-14 flex items-center justify-center rounded-full border-2 border-white mb-4">
-                <FaInstagram className="cursor-pointer hover:text-white hover:bg-[#C13584]" />
+              <div className="w-14 h-14 flex items-center justify-center rounded-full border-2 hover:bg-[#C13584] border-white mb-4">
+                <FaInstagram className="cursor-pointer hover:text-white " />
               </div>
-              <div className="w-14 h-14 flex items-center justify-center rounded-full border-2 border-white mb-4">
-                <CiLinkedin className="cursor-pointer hover:text-white hover:bg-[#0A66C2]" />
+              <div className="w-14 h-14 flex items-center justify-center rounded-full border-2 hover:bg-[#0A66C2] border-white mb-4">
+                <CiLinkedin className="cursor-pointer hover:text-white " />
               </div>
             </div>
           </div>

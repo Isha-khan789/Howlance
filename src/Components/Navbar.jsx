@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/4.png";
 import { CgMenuRight, CgClose } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -30,7 +31,7 @@ const Navbar = () => {
     {
       name: "Industry-Specific Solutions",
       dropdown: [
-        { label: "Real Estate - Profit Engines", href: "#" },
+        { label: "Real Estate - Profit Engines", href: "/real-estate" },
         { label: "SaaS Demo Scheduling", href: "#" },
       ],
     },
@@ -47,9 +48,9 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="font-display fixed top-0  left-0 z-20 w-full bg-white text-black transition-colors duration-300 hover:bg-black hover:text-white group ">
+    <header className="font-display fixed top-0 left-0 z-20 w-full bg-white text-black transition-colors duration-300 hover:bg-black hover:text-white group">
       <nav className="flex justify-between items-center px-6 py-3">
-        {/* Logo */}
+        {/* Logo (Left) */}
         <a href="/">
           <img
             src={logo}
@@ -58,8 +59,8 @@ const Navbar = () => {
           />
         </a>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-10 text-lg">
+        {/* Centered Nav Items */}
+        <div className="hidden md:flex items-center space-x-10 text-lg absolute left-1/2 transform -translate-x-1/2">
           {navItems.map((item) => (
             <div key={item.name} className="relative">
               <button
@@ -68,17 +69,27 @@ const Navbar = () => {
               >
                 {item.name}
               </button>
-              {openDropdown === item.name && (
+
+              {openDropdown === item.name && item.dropdown && (
                 <div className="absolute left-0 mt-2 w-60 bg-white text-black group-hover:bg-gray-900 group-hover:text-white shadow-lg rounded-lg transition-all duration-300">
                   <ul className="py-2">
                     {item.dropdown.map((link) => (
                       <li key={link.label}>
-                        <a
-                          href={link.href}
-                          className="block px-4 py-2 text-sm hover:white hover:text-white transition-all"
-                        >
-                          {link.label}
-                        </a>
+                        {link.label === "Real Estate - Profit Engines" ? (
+                          <Link
+                            to="/real-estate"
+                            className="block px-4 py-2 text-sm hover:text-white transition-all"
+                          >
+                            {link.label}
+                          </Link>
+                        ) : (
+                          <a
+                            href={link.href}
+                            className="block px-4 py-2 text-sm hover:text-white transition-all"
+                          >
+                            {link.label}
+                          </a>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -86,12 +97,12 @@ const Navbar = () => {
               )}
             </div>
           ))}
-
-          {/* Contact Button */}
-          <button className="bg-[black] px-8 py-2 hover:bg-white hover:text-black rounded-full  text-white font-semibold transition-all">
-            Contact
-          </button>
         </div>
+
+        {/* Contact Button (Right) */}
+        <button className="hidden md:block bg-[black] px-8 py-2 hover:bg-white hover:text-black rounded-full text-white font-semibold transition-all">
+          Contact
+        </button>
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden">
@@ -103,37 +114,6 @@ const Navbar = () => {
           </button>
         </div>
       </nav>
-
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-white text-black group-hover:bg-black group-hover:text-white shadow-md px-6 py-4 space-y-4">
-          {navItems.map((item) => (
-            <div key={item.name}>
-              <button
-                onClick={() =>
-                  toggleDropdown(openDropdown === item.name ? null : item.name)
-                }
-                className="w-full text-left font-bold py-2"
-              >
-                {item.name}
-              </button>
-              {openDropdown === item.name && (
-                <div className="pl-4 space-y-2">
-                  {item.dropdown.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      className="block text-sm hover:text-white"
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
     </header>
   );
 };
