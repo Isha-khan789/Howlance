@@ -13,6 +13,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Dash_layout from "./Dash_lay/Real_estate/Layout/Dash_layout";
 import Real from "./Dash_lay/Real_estate/Real";
+import Car from "./Dash_lay/Careers/Car";
 
 function HomePage() {
   return (
@@ -42,6 +43,9 @@ function App() {
         {/* Real Estate Routes */}
         <Route path="/real-estate" element={<Dash_layout />}>
           <Route index element={<Real />} />
+        </Route>
+        <Route path="/careers" element={<Dash_layout />}>
+          <Route index element={<Car />} />
         </Route>
       </Routes>
     </BrowserRouter>

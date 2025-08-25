@@ -3,7 +3,7 @@ import logo from "../assets/Logo_white.png";
 import { CgMenuRight, CgClose } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import logo1 from "../assets/Logo_black.png";
-import { div } from "framer-motion/client";
+import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -63,18 +63,20 @@ const Navbar = () => {
       ],
     },
     { name: "Hire VA" },
+    { name: "Pricing" },
+
     {
       name: "Company",
       dropdown: [
         { label: "About", href: "#" },
-        { label: "Careers", href: "#" },
+        { label: "Careers", href: "/Careers" },
       ],
     },
   ];
 
   return (
     <header
-      className={`font-display  fixed hover:bg-black top-0 left-0 z-20 w-full transition-colors duration-300 ${
+      className={`font-display  fixed hover:bg-black hover:text-white top-0 left-0 z-20 w-full transition-colors duration-300 ${
         scrolled ? "bg-black/50 text-white" : "bg-white text-black"
       } group`}
     >
@@ -132,15 +134,46 @@ const Navbar = () => {
         </div>
 
         {/* Contact Button */}
-        <button
-          className={`hidden md:block px-8 py-2 rounded-full font-semibold transition-all ${
-            scrolled
-              ? "bg-white text-black hover:bg-black hover:text-white"
-              : "bg-black text-white hover:bg-white hover:text-black"
-          }`}
-        >
-          Contact
-        </button>
+        {/* Desktop Buttons */}
+        {/* D{/* Desktop Buttons */}
+        <div className="hidden md:flex space-x-4 items-center">
+          <Link
+            to="/login"
+            className={`px-8 py-2 font-semibold flex items-center rounded-md gap-2 transition-all duration-300
+      text-black
+      group-hover:text-black
+      group-hover:bg-white
+      ${scrolled ? "text-black" : "text-black"}
+    `}
+          >
+            <FaUser />
+            Login
+          </Link>
+
+          <button
+            className={`px-8 py-2 border-2 border-black rounded-md font-semibold transition-all duration-300
+      bg-white text-black
+      group-hover:bg-white group-hover:text-black 
+      ${scrolled ? "bg-white text-black" : "bg-white text-black"}
+    `}
+          >
+            7-Days Trial
+          </button>
+
+          <button
+            className={`px-8 py-2 font-semibold transition-all duration-300 rounded-md
+    ${
+      scrolled
+        ? "bg-white text-black border-black"
+        : "bg-black text-white border-white"
+    }
+    hover:bg-white hover:text-black
+ 
+  `}
+          >
+            Contact
+          </button>
+        </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">

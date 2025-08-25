@@ -7,7 +7,7 @@ const Statss = () => {
     { end: 395, label: "Seller Matched with Buyers" },
 
     { end: 73685, label: "Total Sq. Ft. sold" },
-    { end: 100, label: "Total Values of deals" },
+    { end: 100, label: "Total Values of deals", prefix: "$", suffix: "M" },
   ];
 
   return (
@@ -25,9 +25,15 @@ const Statss = () => {
             className="flex flex-col items-center flex-1 min-w-[300px]"
           >
             <h2 className="text-4xl font-normal text-white">
-              <CountUp end={stat.end} duration={3} />+
+              <CountUp
+                end={stat.end}
+                duration={3}
+                prefix={stat.prefix || ""}
+                suffix={stat.suffix || ""}
+              />
+              +
             </h2>
-            <p className="mt-2 whitespace-nowrap text-lg text-white">
+            <p className="mt-2 sm:whitespace-nowrap text-lg text-white">
               {stat.label}
             </p>
           </div>

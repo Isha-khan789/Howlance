@@ -12,7 +12,8 @@ const Hero = () => {
       viewport={{ once: false, amount: 0.5 }}
     >
       <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-light text-black leading-snug max-w-4xl">
-        Where business dreams <br /> become reality
+        Where business dreams
+        <span className="block lg:inline"> become reality</span>
       </h3>
 
       <p className="mt-6 text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 font-secondary max-w-7xl">

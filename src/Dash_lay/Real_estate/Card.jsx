@@ -7,49 +7,45 @@ const Card = () => {
   const Realtors = [
     {
       title: "Starter",
-      duration: "2 Months",
-      pricing: "$1,000",
-      commission: "1%",
+      pricing: "$800",
+
       features: [
-        "5 exclusive homeowner or commercial leads",
+        "10 exclusive homeowner or commercial  leads",
         "Verified buyer and seller connections",
         "Location and budget targeting",
       ],
     },
     {
       title: "Growth",
-      duration: "3 Months",
-      pricing: "$3,000",
-      commission: "1%",
+      pricing: "$1,500",
+
       features: [
-        "20 exclusive homeowner or commercial leads",
+        "18 exclusive homeowner or commercial leads",
         "Property insights and analytics",
         "Increased closing opportunities",
         "Time-saving prospecting tools",
       ],
-      highlight: true,
     },
     {
       title: "Elite",
-      duration: "6 Months",
-      pricing: "$5,000",
-      commission: "1%",
+      pricing: "$3,000 + 5% Deal Success",
+
       features: [
-        "100+ mixed leads (buyers, sellers, homeowners, commercial)",
+        "30 mixed leads (buyers, sellers, homeowners, commercial)",
         "Advanced data-driven analytics",
         "Dedicated account manager",
         "Unlimited targeting & market insights",
+        "Fully Verified Prospects (ISA Screened & Double-Checked)",
       ],
+      highlight: true,
     },
   ];
   const investorPlans = [
     {
       title: "Starter",
-      duration: "2 Months",
       pricing: "$1,000",
-      commission: "2%",
       features: [
-        "5+ off-market property leads",
+        "20 off-market property leads",
         "Verified seller connections",
         "Location and budget targeting",
         "Property insights",
@@ -57,28 +53,25 @@ const Card = () => {
     },
     {
       title: "Growth",
-      duration: "3 Months",
-      pricing: "$3,000",
-      commission: "2%",
+      pricing: "$2,500",
       features: [
-        "15+ property opportunities",
+        "36 property opportunities",
         "Data-driven ROI insights",
         "Subscription-based lead flow",
         "Access to serious sellers",
       ],
-      highlight: true,
     },
     {
       title: "Elite",
-      duration: "6 Months",
-      pricing: "$5,000",
-      commission: "1%",
+      pricing: "$5,000  + 5% Deal Success",
       features: [
-        "100+ mixed leads (sellers, homeowners, buyers)",
+        "60 mixed leads (sellers, homeowners, buyers)",
         "High-ROI investment opportunities",
         "Advanced analytics dashboard",
         "Dedicated account manager",
+        "Fully Verified Prospects (ISA Screened & Double-Checked)",
       ],
+      highlight: true,
     },
   ];
   const plan = activeTab === "Realtors" ? Realtors : investorPlans;
@@ -88,7 +81,7 @@ const Card = () => {
         <h3 className="text-3xl font-display">
           Your Pipeline. Your Profit. No Risk.
         </h3>
-        <p className="font-display text-md max-w-4xl p-3 mt-1">
+        <p className="font-display text-md max-w-3xl p-3 mt-1">
           We handle the hard part—finding & verifying real buyers and sellers.
           You focus on closing. Plus, enjoy instant replacements and a
           guaranteed refund policy under our subscription plans.
@@ -104,7 +97,7 @@ const Card = () => {
                 : "text-black hover:bg-gray-700"
             }`}
           >
-            Realtors
+            3 Months
           </button>
           <button
             onClick={() => setActiveTab("Investors")}
@@ -114,7 +107,7 @@ const Card = () => {
                 : "text-black hover:bg-gray-300"
             }`}
           >
-            Investors
+            6 Months
           </button>
         </div>
         {/* cards */}
@@ -126,10 +119,10 @@ const Card = () => {
                 plan.highlight ? "bg-black text-white scale-105" : "bg-white"
               }`}
             >
-              <h3 className="text-xl font-semibold mb-4">{plan.title}</h3>
-              <p className="text-lg font-bold">
-                {plan.duration} | {plan.price} | {plan.commission}
-              </p>
+              <h3 className="text-xl font-semibold mb-4 whitespace-nowrap">
+                {plan.title} | {plan.pricing}
+              </h3>
+
               <ul className="mt-6 space-y-3 w-full">
                 {plan.features.map((feature, i) => (
                   <li key={i} className="text-sm flex items-start gap-x-3">
@@ -142,7 +135,9 @@ const Card = () => {
                 ))}
               </ul>
               <button
-                className={`mt-8 px-6 py-2 rounded-full font-semibold transition ${
+                className={`px-6 py-2 rounded-full font-semibold transition ${
+                  plan.title === "Starter" ? "mt-28" : "mt-18"
+                } ${
                   plan.highlight
                     ? "bg-white text-black hover:bg-gray-200"
                     : "bg-gray-200 hover:bg-gray-300"

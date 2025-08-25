@@ -2,11 +2,18 @@ import React, { useState, useEffect } from "react";
 import logo from "../../../assets/4.png";
 import { CgMenuRight, CgClose } from "react-icons/cg";
 import { Link } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const toggleDropdown = (dropdownName) => {
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
   };
@@ -39,7 +46,7 @@ const Navbar = () => {
     {
       name: "Industry-Specific Solutions",
       dropdown: [
-        { label: "Real Estate - Profit Engines", href: "/Real_estate" },
+        { label: "Real Estate - Profit Engines", href: "/real-estate" },
         { label: "SaaS Demo Scheduling", href: "/services/saas" },
       ],
     },
@@ -105,8 +112,35 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="hidden md:block">
-            <button className="bg-black px-8 py-2 hover:bg-white hover:text-black rounded-full text-white font-semibold transition-all">
+          {/* Desktop Buttons */}
+          <div className="hidden md:flex space-x-4 items-center">
+            <Link
+              to="/login"
+              className={`px-8 py-2 font-semibold flex items-center gap-2 transition-all duration-300
+      text-black
+      group-hover:bg-white
+      group-hover:text-black
+    `}
+            >
+              <FaUser />
+              Login
+            </Link>
+
+            <button
+              className={`px-8 py-2 border-2 rounded-md border-black font-semibold transition-all duration-300
+      bg-white text-black
+      group-hover:bg-black group-hover:text-white group-hover:border-white
+    `}
+            >
+              7-Days Trial
+            </button>
+
+            <button
+              className={`px-8 py-2 font-semibold rounded-md transition-all duration-300
+      bg-black text-white
+      group-hover:bg-white group-hover:text-black
+    `}
+            >
               Contact
             </button>
           </div>
@@ -122,7 +156,7 @@ const Navbar = () => {
         </nav>
 
         {mobileOpen && (
-          <div className="md:hidden bg-white text-black shadow-md px-6 py-4 space-y-4 rounded-b-3xl group-hover:bg-black group-hover:text-white">
+          <div className="md:hidden w-full bg-white text-black shadow-md px-6 py-4 space-y-4 rounded-b-3xl">
             {navItems.map((item) => (
               <div key={item.name}>
                 <button
@@ -138,20 +172,34 @@ const Navbar = () => {
                 {openDropdown === item.name && item.dropdown && (
                   <div className="pl-4 space-y-2">
                     {item.dropdown.map((link) => (
-                      <a
+                      <Link
+                        to={link.href}
                         key={link.label}
-                        href={link.href}
-                        className="block text-sm hover:text-white"
+                        className="block text-sm text-black hover:text-gray-700"
+                        onClick={() => setMobileOpen(false)}
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 )}
               </div>
             ))}
 
-            <button className="bg-black w-full px-8 py-2 rounded-full text-white font-semibold hover:bg-white hover:text-black transition-all">
+            {/* Mobile Buttons */}
+            <Link
+              to="/login"
+              className="w-full px-6 py-2 flex items-center justify-center gap-2 font-semibold text-black border border-black rounded-md hover:bg-black hover:text-white transition-all"
+            >
+              <FaUser />
+              Login
+            </Link>
+
+            <button className="w-full px-6 py-2 border-2 border-black rounded-md font-semibold bg-white text-black hover:bg-black hover:text-white transition-all">
+              7-Days Trial
+            </button>
+
+            <button className="w-full px-6 py-2 rounded-md font-semibold bg-black text-white hover:bg-white hover:text-black transition-all">
               Contact
             </button>
           </div>
