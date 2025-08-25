@@ -28,15 +28,30 @@ const Footer = () => {
 
           <div className="flex space-x-4">
             <div className="flex space-x-4 my-4 md:my-0 text-white text-xl">
-              <div className="w-14 h-14 flex items-center justify-center rounded-full border-2 hover:bg-[#1877F2] border-white mb-4">
+              <a
+                className="w-14 h-14 flex items-center justify-center rounded-full border-2 hover:bg-[#1877F2] border-white mb-4"
+                href=" https://www.facebook.com/howlance.official/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaFacebookF className="cursor-pointer hover:text-white " />
-              </div>
-              <div className="w-14 h-14 flex items-center justify-center rounded-full hover:bg-[#C13584] border-2 border-white mb-4">
+              </a>
+              <a
+                className="w-14 h-14 flex items-center justify-center rounded-full hover:bg-[#C13584] border-2 border-white mb-4"
+                href="https://www.instagram.com/howlance.pk?igsh=aDEzbHJ0YnRwZTI="
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaInstagram className="cursor-pointer hover:text-white " />
-              </div>
-              <div className="w-14 h-14 flex items-center justify-center rounded-full hover:bg-[#0A66C2] border-2 border-white mb-4">
+              </a>
+              <a
+                className="w-14 h-14 flex items-center justify-center rounded-full hover:bg-[#0A66C2] border-2 border-white mb-4"
+                href="https://www.linkedin.com/company/howlance/?viewAsMember=true"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <CiLinkedin className="cursor-pointer hover:text-white " />
-              </div>
+              </a>
             </div>
           </div>
         </div>

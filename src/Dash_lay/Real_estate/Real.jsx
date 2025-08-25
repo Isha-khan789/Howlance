@@ -1,10 +1,8 @@
 import React from "react";
 import Heroo from "./Heroo";
 import Card from "./Card";
-import Vision from "../../Components/Vision";
-import Accordion from "../../Components/Accordion";
 import Client from "../../Components/Client";
-
+import Accordiann from "./Accordiann";
 const Real = () => {
   return (
     <div>
@@ -12,8 +10,7 @@ const Real = () => {
       <div id="subscriptions">
         <Card />
       </div>
-      <Vision />
-      <Accordion />
+      <Accordiann />
       <Client />
     </div>
   );

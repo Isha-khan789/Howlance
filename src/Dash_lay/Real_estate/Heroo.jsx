@@ -1,5 +1,6 @@
 import React from "react";
 import Vid from "../../assets/vid_fro.mp4";
+import Statss from "./Statss";
 
 const Heroo = () => {
   const scrollTocard = () => {
@@ -27,7 +28,7 @@ const Heroo = () => {
         </h1>
 
         <p
-          className="text-white font-semibold font-display mt-4
+          className="text-white font-normal font-display mt-4
           text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl"
         >
           Connecting Investors, Realtors, Buyers & Sellers Under One Roof
@@ -41,6 +42,9 @@ const Heroo = () => {
         >
           See Subscription
         </button>
+        <div className="mt-5">
+          <Statss />
+        </div>
       </div>
     </div>
   );

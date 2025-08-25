@@ -34,7 +34,7 @@ const Vision = () => {
       whileInView={"show"}
       viewport={{ once: false, amount: 0.3 }}
     >
-      <h2 className="text-2xl md:text-3xl font-bold font-display text-center mb-10">
+      <h2 className="text-2xl md:text-3xl font-normal font-display text-center mb-10">
         Your 3 Steps to Turn Vision into Reality
       </h2>
 
@@ -51,7 +51,7 @@ const Vision = () => {
               </button>
             </div>
 
-            <h3 className="text-2xl font-semibold mb-3">{step.title}</h3>
+            <h3 className="text-2xl font-normal mb-3">{step.title}</h3>
             <p className="text-gray-600 text-base">{step.description}</p>
 
             {index < steps.length - 1 && (

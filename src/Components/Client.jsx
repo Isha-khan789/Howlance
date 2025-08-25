@@ -44,7 +44,7 @@ const Client = () => {
       variants={fadeIn("right", 0.2)}
       initial="hidden"
       whileInView={"show"}
-      viewport={{ once: false, amount: 0.7 }}
+      viewport={{ once: false, amount: 0 }}
       className="py-10 bg-white mt-6"
     >
       <h2 className="text-center text-3xl font-display font-bold mb-8">

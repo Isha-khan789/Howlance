@@ -27,14 +27,28 @@ const Navbar = () => {
     {
       name: "Services",
       dropdown: [
-        { label: "LinkedIn Lead Generation", href: "/services/linkedin" },
+        { label: "LinkedIn Outreach", href: "#" },
+        { label: "Appointment Setting", href: "#" },
+        { label: "Qualification Call", href: "#" },
+        { label: "Multi-Channel Outreach", href: "#" },
+        { label: "Web Development", href: "#" },
+        { label: "Mobile App Development", href: "#" },
       ],
     },
+
     {
       name: "Industry-Specific Solutions",
       dropdown: [
         { label: "Real Estate - Profit Engines", href: "/Real_estate" },
         { label: "SaaS Demo Scheduling", href: "/services/saas" },
+      ],
+    },
+    {
+      name: "Business Stages",
+      dropdown: [
+        { label: "Startups", href: "#" },
+        { label: "Small and Midsized", href: "#" },
+        { label: "Enterprises", href: "#" },
       ],
     },
     {
@@ -51,8 +65,8 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="font-display fixed top-0 left-0 z-20 w-full mt-3">
-      <div className="w-[90%] max-w-7xl mx-auto bg-white text-black rounded-full shadow-md transition-colors duration-300 hover:bg-black hover:text-white group">
+    <header className="font-display  cursor-pointer fixed top-0 left-0 z-20 w-full mt-3">
+      <div className="w-[90%] max-w-7xl  mx-auto bg-white text-black rounded-full shadow-md transition-colors duration-300 hover:bg-black hover:text-white group">
         <nav className="flex items-center justify-between px-6 py-3">
           <a href="/">
             <img
