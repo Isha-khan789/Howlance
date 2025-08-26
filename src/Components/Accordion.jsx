@@ -8,15 +8,15 @@ const AccordionItem = ({ question, answer }) => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <div className="p-4 bg-white mb-6 rounded max-w-2xl w-full mx-auto">
+    <div className="p-4 bg-white mb-4 justify-center w-full md:w-3/4 lg:w-1/2 mx-auto ">
       <div
         className="flex items-center justify-between cursor-pointer text-black"
         onClick={() => setToggle(!toggle)}
       >
-        <h3 className="text-lg font-semibold">{question}</h3>
+        <h3 className="text-lg font-normal">{question}</h3>
         {toggle ? <FaMinus /> : <FaPlus />}
       </div>
-      {toggle && <p className="mt-4 text-black">{answer}</p>}
+      {toggle && <p className="mt-4 text-gray-600 text-left">{answer}</p>}
     </div>
   );
 };
@@ -56,15 +56,15 @@ const Accordion = () => {
 
   return (
     <motion.div
-      className="mt-12 px-4 max-w-4xl font-display mx-auto text-center"
+      className="mt-12 px-4 max-w-4xl sm:max-w-8xl   font-display mx-auto text-center"
       variants={fadeIn("right", 0.2)}
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0.7 }}
     >
-      <h3 className="text-5xl font-bold mb-10">FAQ</h3>
+      <h3 className="text-5xl font-normal mb-10">FAQ</h3>
 
-      <div className="flex flex-col items-center gap-2 text-left">
+      <div className="flex flex-col items-center  text-left">
         {visibleFAQs.map((faq, index) => (
           <AccordionItem
             key={index}

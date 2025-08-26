@@ -24,7 +24,7 @@ const Heroo = () => {
           className="text-white font-normal font-display 
           text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
         >
-          YOUR PATHWAY TO REAL ESTATE
+          Your Pathway To Real Estate
         </h1>
 
         <p

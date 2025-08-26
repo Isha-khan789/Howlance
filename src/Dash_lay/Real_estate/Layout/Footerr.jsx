@@ -1,20 +1,13 @@
 import React from "react";
-import footerlogo from "../../../assets/Black_logo.png";
+import footerlogo from "../../../assets/Logo_white.png";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa6";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
-import { motion } from "framer-motion";
-import { fadeIn } from "../../../Utilities/animation.js";
+
 const Footer = () => {
   return (
-    <motion.div
-      className="py-12 bg-black px-8"
-      variants={fadeIn("right", 0.2)}
-      initial="hidden"
-      whileInView={"show"}
-      viewport={{ once: false, amount: 0.7 }}
-    >
+    <div className="py-12 bg-black px-8">
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {/* Logo + About + Socials */}
         <div className="space-y-6 mr-14 order-last md:order-first">
@@ -135,7 +128,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

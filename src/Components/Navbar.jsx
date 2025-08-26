@@ -4,11 +4,30 @@ import { CgMenuRight, CgClose } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import logo1 from "../assets/Logo_black.png";
 import { FaUser } from "react-icons/fa";
-
+// import logo from "../assets/York.png";
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false); // added
+  const [scrolled, setScrolled] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  let logoSrc;
+
+  if (scrolled && hovered) {
+    logoSrc = logo1; // scrolled + hover
+  } else if (scrolled && !hovered) {
+    logoSrc = logo; // scrolled, not hover
+  } else if (!scrolled && hovered) {
+    logoSrc = logo1; // not scrolled + hover
+  } else {
+    logoSrc = logo1; // not scrolled, not hover
+  }
 
   const toggleDropdown = (dropdownName) => {
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
@@ -81,21 +100,25 @@ const Navbar = () => {
       } group`}
     >
       <nav className="flex justify-between items-center px-6 py-1">
-        <a href="/">
+        <a
+          href="/"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
           <img
-            src={scrolled ? logo : logo1}
-            className="h-20 w-auto transition-all duration-300 group-hover:invert"
+            src={logoSrc}
+            className="h-20 w-auto transition-all duration-300"
             alt="logo"
           />
         </a>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center  space-x-10 text-lg absolute left-1/2 transform -translate-x-1/2">
+        <div className="hidden md:flex items-center  space-x-6 text-lg ">
           {navItems.map((item) => (
             <div key={item.name} className="relative">
               <button
                 onClick={() => toggleDropdown(item.name)}
-                className="font-normal  cursor-pointer  underline underline-offset-8 decoration-transparent hover:text-white transition-all"
+                className="font-normal  cursor-pointer  underline underline-offset-8 decoration-transparent hover:text-gray-500 transition-all"
               >
                 {item.name}
               </button>
@@ -103,7 +126,7 @@ const Navbar = () => {
               {openDropdown === item.name && item.dropdown && (
                 <div
                   className={`absolute left-0 mt-2  w-60 shadow-lg rounded-lg transition-all duration-300 ${
-                    scrolled ? "bg-gray-800 text-white" : "bg-white text-black"
+                    scrolled ? "bg-gray-800 text-white" : "bg-black text-white"
                   }`}
                 >
                   <ul className="py-2">
@@ -112,14 +135,14 @@ const Navbar = () => {
                         {link.label === "Real Estate - Profit Engines" ? (
                           <Link
                             to="/real-estate"
-                            className="block px-4 py-2 text-sm hover:text-white transition-all"
+                            className="block px-4 py-2 text-sm hover:text-gray-400 transition-all"
                           >
                             {link.label}
                           </Link>
                         ) : (
                           <a
                             href={link.href}
-                            className="block px-4 py-2 text-sm hover:text-white transition-all"
+                            className="block px-4 py-2 text-sm hover:text-gray-400 transition-all"
                           >
                             {link.label}
                           </a>
@@ -137,37 +160,34 @@ const Navbar = () => {
         {/* Desktop Buttons */}
         {/* D{/* Desktop Buttons */}
         <div className="hidden md:flex space-x-4 items-center">
-          <Link
-            to="/login"
-            className={`px-8 py-2 font-semibold flex items-center rounded-md gap-2 transition-all duration-300
+          <div
+            className={`px-8 py-2 font-semibold flex items-center rounded-full  gap-2 transition-all duration-300
       text-black
       group-hover:text-black
       group-hover:bg-white
-      ${scrolled ? "text-black" : "text-black"}
+      ${scrolled ? "text-white" : "text-black"}
     `}
           >
             <FaUser />
             Login
-          </Link>
+          </div>
 
           <button
-            className={`px-8 py-2 border-2 border-black rounded-md font-semibold transition-all duration-300
-      bg-white text-black
-      group-hover:bg-white group-hover:text-black 
-      ${scrolled ? "bg-white text-black" : "bg-white text-black"}
-    `}
+            className={`px-8 py-2 font-semibold transition-all duration-300 rounded-full       group-hover:text-black group-hover:bg-white
+
+    ${scrolled ? "bg-white text-black " : "bg-black text-white   "}
+    hover:bg-black hover:text-white
+ 
+  `}
           >
             7-Days Trial
           </button>
 
           <button
-            className={`px-8 py-2 font-semibold transition-all duration-300 rounded-md
-    ${
-      scrolled
-        ? "bg-white text-black border-black"
-        : "bg-black text-white border-white"
-    }
-    hover:bg-white hover:text-black
+            className={`px-8 py-2 font-semibold transition-all duration-300 rounded-full       group-hover:text-black group-hover:bg-white
+
+    ${scrolled ? "bg-white text-black " : "bg-black text-white   "}
+    hover:bg-black hover:text-white
  
   `}
           >

@@ -78,10 +78,10 @@ const Card = () => {
   return (
     <>
       <div className="p-8 mt-9  items-center flex flex-col justify-center  ">
-        <h3 className="text-3xl font-display">
+        <h3 className="text-3xl font-display text-center">
           Your Pipeline. Your Profit. No Risk.
         </h3>
-        <p className="font-display text-md max-w-3xl p-3 mt-1">
+        <p className="font-display text-md max-w-3xl text-center  p-3 mt-1">
           We handle the hard part—finding & verifying real buyers and sellers.
           You focus on closing. Plus, enjoy instant replacements and a
           guaranteed refund policy under our subscription plans.

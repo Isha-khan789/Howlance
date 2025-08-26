@@ -1,6 +1,5 @@
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import "react-tabs/style/react-tabs.css"; // Ensure tabs render correctly
 import Start from "../assets/Start.webp";
 import small from "../assets/small.webp";
 import Enter from "../assets/Enterprise.webp";
@@ -13,7 +12,7 @@ const Stage = () => {
       variants={fadeIn("right", 0.2)}
       initial="hidden"
       whileInView={"show"}
-      viewport={{ once: false, amount: 0.7 }}
+      viewport={{ once: false, amount: 0.2 }}
       className="flex flex-col justify-center items-center mt-8 p-4 md:p-8 w-full"
     >
       <h3 className="font-normal font-display text-2xl sm:text-3xl text-center">
@@ -29,14 +28,36 @@ const Stage = () => {
 
       <div className="py-8 md:py-12 md:w-4/5 mx-auto w-full">
         <Tabs>
-          <TabList className="flex flex-wrap items-center justify-center text-sm sm:text-base md:text-xl gap-2 sm:gap-4 md:gap-8">
-            <Tab className="shadow-md px-2 sm:px-4 md:px-6 py-2 md:py-3 cursor-pointer rounded-3xl hover:bg-black hover:text-white">
-              Startups
+          <TabList
+            className="flex flex-wrap   
+ items-center justify-center text-sm sm:text-base md:text-xl gap-2 sm:gap-4 md:gap-8"
+          >
+            <Tab
+              className="shadow-md px-2 sm:px-4 md:px-6 py-2 md:py-3 
+cursor-pointer rounded-3xl 
+hover:bg-black hover:text-white 
+active:bg-black active:text-white 
+data-[selected]:bg-white data-[selected]:text-black"
+            >
+              Startup
             </Tab>
-            <Tab className="shadow-md px-2 sm:px-4 md:px-6 py-2 md:py-3 cursor-pointer rounded-3xl hover:bg-black hover:text-white">
+
+            <Tab
+              className="shadow-md px-2 sm:px-4 md:px-6 py-2 md:py-3 
+cursor-pointer rounded-3xl 
+hover:bg-black hover:text-white 
+active:bg-black active:text-white 
+data-[selected]:bg-white data-[selected]:text-black"
+            >
               Small & Midsized Businesses
             </Tab>
-            <Tab className="shadow-md px-2 sm:px-4 md:px-6 py-2 md:py-3 cursor-pointer rounded-3xl hover:bg-black hover:text-white">
+            <Tab
+              className="shadow-md px-2 sm:px-4 md:px-6 py-2 md:py-3 
+cursor-pointer rounded-3xl 
+hover:bg-black hover:text-white 
+active:bg-black active:text-white 
+data-[selected]:bg-white data-[selected]:text-black"
+            >
               Enterprises
             </Tab>
           </TabList>
