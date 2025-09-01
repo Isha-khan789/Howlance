@@ -27,26 +27,26 @@ const Vision = () => {
   ];
 
   return (
-    <motion.div
-      className="py-12 px-4"
-      variants={fadeIn("up", 0.2)}
-      initial="hidden"
-      whileInView={"show"}
-      viewport={{ once: false, amount: 0.3 }}
-    >
-      <h2 className="text-2xl md:text-3xl font-normal font-display text-center mb-10">
+    <div className="py-12 px-4 bg-white">
+      <h2 className="text-2xl md:text-3xl font-normal text-gray-600] font-display text-center mb-10">
         Your 3 Steps to Turn Vision into Reality
       </h2>
 
-      <div className="flex flex-col md:flex-row p-5 border-gray-400 rounded-x3l shadow-md items-stretch justify-center gap-10 max-w-6xl mx-auto">
+      <motion.div
+        className="flex flex-col md:flex-row p-5 border-gray-400  rounded-x3l shadow-md items-stretch justify-center gap-10 max-w-6xl mx-auto"
+        variants={fadeIn("up", 0.2)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.3 }}
+      >
         {steps.map((step, index) => (
           <div
             key={index}
             className="flex flex-col items-start relative w-full md:w-1/3"
           >
             <div className="flex items-center justify-between w-full mb-4">
-              <span className="text-black">{step.icon}</span>
-              <button className="rounded-full px-5 py-1 text-sm font-semibold bg-white text-black hover:bg-black transition hover:text-white">
+              <span className="text-[#2F2C2B]">{step.icon}</span>
+              <button className="rounded-full px-5 py-1 text-sm font-semibold bg-white text-gray-600 hover:bg-[#2F2C2B] transition hover:text-white">
                 STEP {index + 1}
               </button>
             </div>
@@ -57,20 +57,20 @@ const Vision = () => {
             {index < steps.length - 1 && (
               <div className="hidden md:flex absolute right-[-10px] top-1/2 -translate-y-1/2">
                 <div className="bg-white rounded-full p-3">
-                  <FaArrowRight size={18} className="text-black" />
+                  <FaArrowRight size={18} className="text-[#2F2C2B]" />
                 </div>
               </div>
             )}
           </div>
         ))}
-      </div>
+      </motion.div>
 
       <div className="flex justify-center">
-        <button className="bg-black flex mt-7 text-white cursor-pointer font-medium rounded-full px-13 py-3 items-center justify-center gap-2 hover:bg-black hover:text-white transition">
+        <button className="bg-[#2F2C2B] flex mt-7 text-white cursor-pointer font-medium rounded-full px-10 py-2 items-center justify-center gap-2 hover:bg-[#2F2C2B] hover:text-white transition">
           Book a Call
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

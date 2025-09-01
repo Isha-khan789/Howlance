@@ -1,50 +1,39 @@
 import React from "react";
-import Vid from "../../assets/vid_fro.mp4";
-import Statss from "./Statss";
+import pic1 from "../../assets/Canvalogoo.png";
 
 const Heroo = () => {
-  const scrollTocard = () => {
-    document.getElementById("subscriptions")?.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
   return (
-    <div className="relative w-full h-screen">
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover z-[-1]"
-        src={Vid}
-      ></video>
+    <div className="relative w-full min-h-screen flex flex-col items-center text-center px-[5vw] overflow-hidden">
+      {/* Hero Content */}
+      <div className="flex flex-col items-center justify-center mt-[96px]">
+        {/* Text Block */}
+        <div className="px-4 text-center mb-10">
+          <h1
+            className="text-[#2F2C2B] font-light font-display 
+            text-3xl sm:text-4xl md:text-5xl lg:text-3xl drop-shadow-lg lg:max-w-3xl mt-30 sm:mt-20 lg:mt-8"
+          >
+            Your Pathway To Real Estate
+          </h1>
 
-      <div className="flex flex-col items-center justify-center h-full bg-black/50 px-4 text-center">
-        <h1
-          className="text-white font-normal font-display 
-          text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
-        >
-          Your Pathway To Real Estate
-        </h1>
-
-        <p
-          className="text-white font-normal font-display mt-4
-          text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl"
-        >
-          Connecting Investors, Realtors, Buyers & Sellers Under One Roof
-        </p>
-
-        <button
-          onClick={scrollTocard}
-          className="bg-white font-display text-black rounded-full mt-6
-          py-2 px-6 sm:px-8 md:px-12 lg:px-16 flex items-center gap-2 
-          text-sm sm:text-base md:text-lg shadow-md hover:bg-gray-100 transition"
-        >
-          See Subscription
-        </button>
-        <div className="mt-5">
-          <Statss />
+          <p
+            className="text-gray-600 font-light font-display mt-4
+            text-base sm:text-lg md:text-xl lg:text-md max-w-2xl drop-shadow-md"
+          >
+            Connecting Investors, Realtors, Buyers & Sellers Under One Roof
+          </p>
         </div>
+
+        {/* Logo */}
+        <img
+          src={pic1}
+          alt="Logo"
+          className="w-full sm:w-full md:w-[350px] lg:w-[350px] 
+          h-auto object-contain mx-auto 
+          transform-gpu origin-center 
+          scale-[2] sm:scale-[2.2] md:scale-[4] lg:scale-[3]
+          -mt-8 sm:-mt-16 md:-mt-1 lg:-mt-3 
+          sm:mb-0"
+        />
       </div>
     </div>
   );

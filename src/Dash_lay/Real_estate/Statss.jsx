@@ -24,7 +24,7 @@ const Statss = () => {
             key={i}
             className="flex flex-col items-center flex-1 min-w-[300px]"
           >
-            <h2 className="text-4xl font-normal text-white">
+            <h2 className="text-4xl font-normal text-black">
               <CountUp
                 end={stat.end}
                 duration={3}
@@ -33,7 +33,7 @@ const Statss = () => {
               />
               +
             </h2>
-            <p className="mt-2 sm:whitespace-nowrap text-lg text-white">
+            <p className="mt-2 sm:whitespace-nowrap text-lg text-black">
               {stat.label}
             </p>
           </div>

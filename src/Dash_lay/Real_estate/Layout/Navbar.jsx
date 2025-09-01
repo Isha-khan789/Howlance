@@ -1,22 +1,34 @@
 import React, { useState, useEffect } from "react";
-import logo from "../../../assets/Logo_black.png";
-// import logo1 from "../../../assets/Logo_White.png";
+import logo from "../../../assets/Logo_white.png";
+import logo1 from "../../../assets/Logo_black.png";
 import { CgMenuRight, CgClose } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
-import logo1 from "../../../assets/Logo_white.png";
+import { FaQuestion } from "react-icons/fa6";
+
 const Navbar = () => {
-  const [openDropdown, setOpenDropdown] = useState(null); // desktop dropdown
-  const [mobileOpen, setMobileOpen] = useState(false); // mobile menu
-  const [mobileDropdown, setMobileDropdown] = useState(null); // mobile dropdown
-  // const [scrolled, setScrolled] = useState(false);
-  // const [showlogo setShowlogo]=useState()
-  const [hovered, setHovered] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const logoSrc = mobileOpen ? logo : logo;
+  const toggleDropdown = (name) => {
+    setOpenDropdown((prev) => (prev === name ? null : name));
+  };
+  const closeDropdown = () => setOpenDropdown(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest("nav")) closeDropdown();
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
   const navItems = [
@@ -35,7 +47,7 @@ const Navbar = () => {
       name: "Industry-Specific Solutions",
       dropdown: [
         { label: "Real Estate - Profit Engines", href: "/real-estate" },
-        { label: "SaaS Demo Scheduling", href: "/services/saas" },
+        { label: "SaaS - Every Meeting, A Wing", href: "#" },
       ],
     },
     {
@@ -46,165 +58,198 @@ const Navbar = () => {
         { label: "Enterprises", href: "#" },
       ],
     },
-    { name: "Hire VA", href: "/hire-va" },
+    { name: "Hire VA" },
+    { name: "Pricing" },
     {
       name: "Company",
       dropdown: [
-        { label: "About", href: "/about" },
-        { label: "Careers", href: "/careers" },
+        { label: "About", href: "#" },
+        { label: "Careers", href: "/Careers" },
       ],
     },
   ];
 
   return (
     <header
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className={`fixed top-0 mt-3 left-0 z-20 w-full  font-display cursor-pointer`}
+      className="font-display fixed top-0 left-0 z-50 w-full transition-colors duration-300 
+          text-white 
+           "
     >
-      {/* Navbar Container (Desktop & Mobile Button) */}
-      <div className="w-[90%] max-w-7xl mx-auto transition-colors duration-300">
-        <nav className="flex items-center justify-between px-4 md:px-6 py-2 md:py-3 relative hover:bg-black hover:text-white bg-white text-black rounded-full shadow-md group">
-          {/* Logo */}
-          <Link to="/">
-            <img
-              src={hovered && mobileOpen ? logo : logo}
-              alt="logo"
-              className="h-12 md:h-16 w-auto transition-all duration-300"
-            />
-          </Link>
+      <nav className="flex justify-between items-center px-6 py-2 md:py-4">
+        {/* Logo */}
+        <Link to="/">
+          <img
+            src={logoSrc}
+            alt="logo"
+            className="h-20 w-auto transition-all duration-300"
+          />
+        </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex flex-1 justify-center items-center space-x-10 text-md">
-            {navItems.map((item) => (
-              <div key={item.name} className="relative">
-                <button
-                  onClick={() =>
-                    setOpenDropdown(
-                      openDropdown === item.name ? null : item.name
-                    )
-                  }
-                  className="font-normal underline underline-offset-8 decoration-transparent hover:text-gray-500 transition-all"
-                >
-                  {item.name}
-                </button>
-                {openDropdown === item.name && item.dropdown && (
-                  <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-60 bg-white text-black shadow-lg rounded-lg transition-all duration-300">
-                    <ul className="py-2">
-                      {item.dropdown.map((link) => (
-                        <li key={link.label}>
-                          <Link
-                            to={link.href}
-                            className="block px-4 py-2 text-sm hover:text-gray-400 transition-all"
-                          >
-                            {link.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Desktop Buttons */}
-          <div className="hidden md:flex space-x-4 items-center">
-            <div
-              className="px-8 py-2 font-semibold flex items-center rounded-full  gap-2 transition-all duration-300
-                  text-black
-                  group-hover:text-white
-                  
-                }"
-            >
-              <FaUser />
-              Login
-            </div>
-            <button
-              className="px-8 py-2 font-semibold transition-all duration-300 rounded-full    bg-black text-white   group-hover:text-black group-hover:bg-white
-
-    hover:bg-black hover:text-white
- 
-  }"
-            >
-              7-Days Trial
-            </button>
-            <button
-              className="px-8 py-2 font-semibold transition-all duration-300 rounded-full    bg-black text-white   group-hover:text-black group-hover:bg-white
-
-    hover:bg-black hover:text-white
- 
-  }"
-            >
-              Contact
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="text-2xl focus:outline-none transition-transform duration-300"
-            >
-              {mobileOpen ? <CgClose /> : <CgMenuRight />}
-            </button>
-          </div>
-        </nav>
-      </div>
-
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="md:hidden absolute top-full left-1/2 mt-4 transform -translate-x-1/2 w-[90%] max-w-md bg-white shadow-md px-4 py-4 space-y-4 z-30 rounded-3xl">
+        {/* Desktop Menu */}
+        <div className="hidden lg:flex items-center space-x-4">
           {navItems.map((item) => (
-            <div key={item.name}>
+            <div key={item.name} className="relative">
               <button
-                onClick={() =>
-                  setMobileDropdown(
-                    mobileDropdown === item.name ? null : item.name
-                  )
-                }
-                className="w-full text-left font-normal py-2"
+                onClick={() => toggleDropdown(item.name)}
+                className="font-normal cursor-pointer hover:opacity-80 transition"
               >
                 {item.name}
               </button>
 
-              {mobileDropdown === item.name && item.dropdown && (
-                <div className="pl-4 space-y-2">
-                  {item.dropdown.map((link) => (
-                    <Link
-                      to={link.href}
-                      key={link.label}
-                      className="block text-sm text-black hover:text-gray-700"
-                      onClick={() => {
-                        setMobileOpen(false);
-                        setMobileDropdown(null);
-                      }}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+              {openDropdown === item.name && item.dropdown && (
+                <div
+                  className={`absolute left-0 mt-2 w-60 shadow-lg rounded-lg overflow-hidden transition ${
+                    scrolled ? "bg-gray-900 text-white" : "bg-black text-white"
+                  }`}
+                >
+                  <ul className="py-2">
+                    {item.dropdown.map((link) => (
+                      <li key={link.label}>
+                        {link.label === "Real Estate - Profit Engines" ? (
+                          <Link
+                            to="/real-estate"
+                            className="block px-4 py-2 text-sm hover:bg-white/10"
+                          >
+                            {link.label}
+                          </Link>
+                        ) : (
+                          <a
+                            href={link.href}
+                            className="block px-4 py-2 text-sm hover:bg-white/10"
+                          >
+                            {link.label}
+                          </a>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
             </div>
           ))}
+        </div>
 
-          {/* Mobile Buttons */}
-          <Link
-            to="/login"
-            className="w-full px-6 py-2 flex items-center justify-center gap-2 font-semibold text-black border border-black rounded-md hover:bg-black hover:text-white transition-all"
+        {/* Desktop Actions */}
+        <div className="hidden lg:flex items-center space-x-2">
+          {/* Help */}
+          <div className="relative">
+            <button
+              onClick={() => toggleDropdown("help")}
+              className={`relative group flex items-center justify-center w-10 h-10 cursor-pointer rounded-full hover:bg-white/10 transition ${
+                scrolled ? "text-white" : "text-[#2F2C2B]"
+              }`}
+            >
+              <FaQuestion className="text-lg text-white" />
+              {/* Tooltip */}
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 text-xs text-white bg-[#2F2C2B] rounded pointer-events-none opacity-0 group-hover:opacity-100 transition">
+                Help
+              </span>
+            </button>
+
+            {openDropdown === "help" && (
+              <div
+                className={`absolute right-0 mt-2 w-44 shadow-lg rounded-lg overflow-hidden transition ${
+                  scrolled
+                    ? "bg-gray-900 text-white"
+                    : "bg-[#2F2C2B] text-white"
+                }`}
+              >
+                <ul className="py-2 text-sm">
+                  <li className="px-4 py-2 hover:bg-white/10 cursor-pointer">
+                    Help Center
+                  </li>
+                  <li className="px-4 py-2 hover:bg-white/10 cursor-pointer">
+                    Support
+                  </li>
+                  <li className="px-4 py-2 hover:bg-white/10 cursor-pointer">
+                    Contact Us
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+
+          {/* Login */}
+          <div
+            className={` group relative px-6 py-2 flex items-center gap-2 cursor-pointer rounded-full hover:opacity-80 transition ${
+              scrolled ? "text-white" : "text-white"
+            }`}
           >
-            <FaUser /> Login
-          </Link>
+            <FaUser />
+            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 text-xs text-white bg-[#2F2C2B] rounded pointer-events-none opacity-0 group-hover:opacity-100 transition">
+              Login
+            </span>{" "}
+          </div>
+        </div>
 
-          <button className="w-full px-6 py-2 border-2 border-black rounded-md font-semibold bg-white text-black hover:bg-black hover:text-white transition-all">
-            7-Days Trial
-          </button>
-
-          <button className="w-full px-6 py-2 rounded-md font-semibold bg-black text-white hover:bg-white hover:text-black transition-all">
-            Contact
+        {/* Mobile Toggle */}
+        <div className="lg:hidden">
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="text-2xl"
+          >
+            {mobileOpen ? <CgClose /> : <CgMenuRight />}
           </button>
         </div>
-      )}
+
+        {/* Mobile Menu */}
+        {mobileOpen && (
+          <div className="absolute top-full left-0 w-full bg-white text-[#2F2C2B] shadow-md flex flex-col items-start px-6 py-4 space-y-3 lg:hidden">
+            {navItems.map((item) => (
+              <div key={item.name} className="w-full">
+                <button
+                  onClick={() => toggleDropdown(item.name)}
+                  className="w-full text-left font-semibold py-2"
+                >
+                  {item.name}
+                </button>
+                {openDropdown === item.name && item.dropdown && (
+                  <ul className="pl-4 flex flex-col space-y-1">
+                    {item.dropdown.map((link) => (
+                      <li key={link.label}>
+                        {link.label === "Real Estate - Profit Engines" ? (
+                          <Link
+                            to="/real-estate"
+                            className="block py-1 hover:text-gray-700"
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            {link.label}
+                          </Link>
+                        ) : (
+                          <a
+                            href={link.href}
+                            className="block py-1 hover:text-gray-700"
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            {link.label}
+                          </a>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+
+            {/* Mobile Help */}
+            <div className="w-full">
+              <button
+                onClick={() => toggleDropdown("help")}
+                className="w-full text-left font-semibold py-2 flex items-center gap-2"
+              >
+                <FaQuestion /> Help
+              </button>
+              {openDropdown === "help" && (
+                <ul className="pl-4 flex flex-col space-y-1 text-sm">
+                  <li className="py-1 hover:text-gray-700">Help Center</li>
+                  <li className="py-1 hover:text-gray-700">Support</li>
+                  <li className="py-1 hover:text-gray-700">Contact Us</li>
+                </ul>
+              )}
+            </div>
+          </div>
+        )}
+      </nav>
     </header>
   );
 };

@@ -16,7 +16,7 @@ import b2b from "../assets/b2b.webp";
 import { motion } from "framer-motion";
 import { fadeIn } from "../Utilities/animation";
 import Foc from "../assets/focal.webp";
-
+import Hu from "../assets/huo.png";
 const Client = () => {
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
@@ -39,7 +39,7 @@ const Client = () => {
     bit,
     force,
     b2b,
-    Foc,
+    Hu,
     pay,
     Foc,
     Un,
@@ -68,21 +68,19 @@ const Client = () => {
     }
   };
   return (
-    <motion.section
-      variants={fadeIn("right", 0.2)}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: false, amount: 0 }}
-      className="py-10 bg-white mt-6"
-    >
-      <h2 className="text-center text-xl sm:text-2xl md:text-3xl font-display font-normal mb-8">
+    <section className="py-10 bg-white">
+      <h2 className="text-center text-xl sm:text-2xl md:text-3xl text-[#2F2C2B] font-display font-normal mb-8">
         Join our growing list of happy clients.
       </h2>
 
       {/* Responsive Grid */}
-      <div
+      <motion.div
         className="max-w-7xl mx-auto grid mt-5 mb-6 px-5 py-6 
                       grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+        variants={fadeIn("up", 0.2)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0 }}
       >
         {logos.map((logo, i) => (
           <div
@@ -104,8 +102,8 @@ const Client = () => {
             />
           </div>
         ))}
-      </div>
-    </motion.section>
+      </motion.div>
+    </section>
   );
 };
 

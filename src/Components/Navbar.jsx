@@ -1,57 +1,35 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/Logo_white.png";
+import logo1 from "../assets/Logo_black.png";
 import { CgMenuRight, CgClose } from "react-icons/cg";
 import { Link } from "react-router-dom";
-import logo1 from "../assets/Logo_black.png";
 import { FaUser } from "react-icons/fa";
-// import logo from "../assets/York.png";
+import { FaQuestion } from "react-icons/fa6";
+
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  let logoSrc;
+  const logoSrc = mobileOpen ? logo1 : scrolled ? logo : logo1;
 
-  if (scrolled && hovered) {
-    logoSrc = logo1; // scrolled + hover
-  } else if (scrolled && !hovered) {
-    logoSrc = logo; // scrolled, not hover
-  } else if (!scrolled && hovered) {
-    logoSrc = logo1; // not scrolled + hover
-  } else {
-    logoSrc = logo1; // not scrolled, not hover
-  }
-
-  const toggleDropdown = (dropdownName) => {
-    setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
+  const toggleDropdown = (name) => {
+    setOpenDropdown((prev) => (prev === name ? null : name));
   };
-
   const closeDropdown = () => setOpenDropdown(null);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (!e.target.closest("nav")) {
-        closeDropdown();
-      }
+      if (!e.target.closest("nav")) closeDropdown();
     };
     document.addEventListener("click", handleClickOutside);
-
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
   const navItems = [
@@ -70,7 +48,7 @@ const Navbar = () => {
       name: "Industry-Specific Solutions",
       dropdown: [
         { label: "Real Estate - Profit Engines", href: "/real-estate" },
-        { label: "SaaS Demo Scheduling", href: "#" },
+        { label: "SaaS - Every Meeting, A Wing", href: "#" },
       ],
     },
     {
@@ -83,7 +61,6 @@ const Navbar = () => {
     },
     { name: "Hire VA" },
     { name: "Pricing" },
-
     {
       name: "Company",
       dropdown: [
@@ -95,38 +72,37 @@ const Navbar = () => {
 
   return (
     <header
-      className={`font-display  fixed hover:bg-black hover:text-white top-0 left-0 z-20 w-full transition-colors duration-300 ${
-        scrolled ? "bg-black/50 text-white" : "bg-white text-black"
-      } group`}
+      className={`font-display fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
+        scrolled
+          ? "bg-black/50 text-white backdrop-blur"
+          : "bg-transparent text-[#2F2C2B]"
+      }`}
     >
-      <nav className="flex justify-between items-center px-6 py-1">
-        <a
-          href="/"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
+      <nav className="flex justify-between items-center px-6 py-2 md:py-4">
+        {/* Logo */}
+        <Link to="/">
           <img
             src={logoSrc}
-            className="h-20 w-auto transition-all duration-300"
             alt="logo"
+            className="h-20 w-auto transition-all duration-300"
           />
-        </a>
+        </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center  space-x-6 text-lg ">
+        <div className="hidden lg:flex items-center space-x-4">
           {navItems.map((item) => (
             <div key={item.name} className="relative">
               <button
                 onClick={() => toggleDropdown(item.name)}
-                className="font-normal  cursor-pointer  underline underline-offset-8 decoration-transparent hover:text-gray-500 transition-all"
+                className="font-normal cursor-pointer hover:opacity-80 transition"
               >
                 {item.name}
               </button>
 
               {openDropdown === item.name && item.dropdown && (
                 <div
-                  className={`absolute left-0 mt-2  w-60 shadow-lg rounded-lg transition-all duration-300 ${
-                    scrolled ? "bg-gray-800 text-white" : "bg-black text-white"
+                  className={`absolute left-0 mt-2 w-60 shadow-lg rounded-lg overflow-hidden transition ${
+                    scrolled ? "bg-gray-900 text-white" : "bg-black text-white"
                   }`}
                 >
                   <ul className="py-2">
@@ -135,14 +111,14 @@ const Navbar = () => {
                         {link.label === "Real Estate - Profit Engines" ? (
                           <Link
                             to="/real-estate"
-                            className="block px-4 py-2 text-sm hover:text-gray-400 transition-all"
+                            className="block px-4 py-2 text-sm hover:bg-white/10"
                           >
                             {link.label}
                           </Link>
                         ) : (
                           <a
                             href={link.href}
-                            className="block px-4 py-2 text-sm hover:text-gray-400 transition-all"
+                            className="block px-4 py-2 text-sm hover:bg-white/10"
                           >
                             {link.label}
                           </a>
@@ -156,63 +132,75 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Contact Button */}
-        {/* Desktop Buttons */}
-        {/* D{/* Desktop Buttons */}
-        <div className="hidden md:flex space-x-4 items-center">
-          <div
-            className={`px-8 py-2 font-semibold flex items-center rounded-full  gap-2 transition-all duration-300
-      text-black
-      group-hover:text-black
-      group-hover:bg-white
-      ${scrolled ? "text-white" : "text-black"}
-    `}
-          >
-            <FaUser />
-            Login
+        {/* Desktop Actions */}
+        <div className="hidden lg:flex items-center space-x-2">
+          {/* Help */}
+          <div className="relative">
+            <button
+              onClick={() => toggleDropdown("help")}
+              className={`relative group flex items-center justify-center w-10 h-10 cursor-pointer rounded-full hover:bg-white/10 transition ${
+                scrolled ? "text-white" : "text-[#2F2C2B]"
+              }`}
+            >
+              <FaQuestion className="text-lg" />
+              {/* Tooltip */}
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 text-xs text-white bg-black rounded pointer-events-none opacity-0 group-hover:opacity-100 transition">
+                Help
+              </span>
+            </button>
+
+            {openDropdown === "help" && (
+              <div
+                className={`absolute right-0 mt-2 w-44 shadow-lg rounded-lg overflow-hidden transition ${
+                  scrolled ? "bg-gray-900 text-white" : "bg-black text-white"
+                }`}
+              >
+                <ul className="py-2 text-sm">
+                  <li className="px-4 py-2 hover:bg-white/10 cursor-pointer">
+                    Help Center
+                  </li>
+                  <li className="px-4 py-2 hover:bg-white/10 cursor-pointer">
+                    Support
+                  </li>
+                  <li className="px-4 py-2 hover:bg-white/10 cursor-pointer">
+                    Contact Us
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
 
-          <button
-            className={`px-8 py-2 font-semibold transition-all duration-300 rounded-full       group-hover:text-black group-hover:bg-white
-
-    ${scrolled ? "bg-white text-black " : "bg-black text-white   "}
-    hover:bg-black hover:text-white
- 
-  `}
+          {/* Login */}
+          <div
+            className={`group relative px-6 py-2 flex items-center gap-2 cursor-pointer rounded-full hover:opacity-80 transition ${
+              scrolled ? "text-white" : "text-[#2F2C2B]"
+            }`}
           >
-            7-Days Trial
-          </button>
-
-          <button
-            className={`px-8 py-2 font-semibold transition-all duration-300 rounded-full       group-hover:text-black group-hover:bg-white
-
-    ${scrolled ? "bg-white text-black " : "bg-black text-white   "}
-    hover:bg-black hover:text-white
- 
-  `}
-          >
-            Contact
-          </button>
+            <FaUser />
+            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 text-xs text-white bg-black rounded pointer-events-none opacity-0 group-hover:opacity-100 transition">
+              Login
+            </span>
+          </div>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        {/* Mobile Toggle */}
+        <div className="lg:hidden">
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="text-2xl focus:outline-none"
+            className="text-2xl"
           >
             {mobileOpen ? <CgClose /> : <CgMenuRight />}
           </button>
         </div>
+
+        {/* Mobile Menu */}
         {mobileOpen && (
-          <div
-            className={`absolute top-full left-0 w-full bg-white shadow-md text-black md:hidden flex flex-col items-start px-6 py-4 space-y-3`}
-          >
+          <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-start px-6 py-4 space-y-3 lg:hidden">
             {navItems.map((item) => (
               <div key={item.name} className="w-full">
                 <button
                   onClick={() => toggleDropdown(item.name)}
-                  className="w-full text-left font-semibold font-display py-2"
+                  className="w-full text-left font-semibold py-2"
                 >
                   {item.name}
                 </button>
@@ -243,6 +231,23 @@ const Navbar = () => {
                 )}
               </div>
             ))}
+
+            {/* Mobile Help */}
+            <div className="w-full">
+              <button
+                onClick={() => toggleDropdown("help")}
+                className="w-full text-left font-semibold py-2 flex items-center gap-2"
+              >
+                <FaQuestion /> Help
+              </button>
+              {openDropdown === "help" && (
+                <ul className="pl-4 flex flex-col space-y-1 text-sm">
+                  <li className="py-1 hover:text-gray-700">Help Center</li>
+                  <li className="py-1 hover:text-gray-700">Support</li>
+                  <li className="py-1 hover:text-gray-700">Contact Us</li>
+                </ul>
+              )}
+            </div>
           </div>
         )}
       </nav>

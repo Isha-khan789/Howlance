@@ -1,12 +1,16 @@
 import React from "react";
-import Navbar from "./Navbar";
+import { Outlet, useLocation } from "react-router-dom";
+import Navbar from "./Navbar"; // layout’s own navbar
 import Footer from "./Footerr";
-import { Outlet } from "react-router-dom";
+import HomeNavbar from "../../../Components/Navbar"; // homepage navbar
 
 const Dash_layout = () => {
+  const location = useLocation();
+  const isRealEstate = location.pathname.startsWith("/real-estate");
+
   return (
     <div>
-      <Navbar />
+      {isRealEstate ? <HomeNavbar /> : <Navbar />}
       <main className="min-h-screen">
         <Outlet />
       </main>

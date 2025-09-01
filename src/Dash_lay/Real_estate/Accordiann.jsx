@@ -6,19 +6,20 @@ import { fadeIn } from "../../Utilities/animation.js";
 // Accordion Item Component
 const AccordionItem = ({ question, answer }) => {
   const [toggle, setToggle] = useState(false);
-
   return (
-    <div className="p-4 bg-white mb-4 justify-center w-full md:w-3/4 lg:w-1/2 mx-auto ">
+    <div className="p-4   mb-4  w-full md:w-3/4 lg:w-2/3 mx-auto">
       <div
-        className="flex items-center justify-between cursor-pointer text-black"
+        className="flex items-center cursor-pointer  text-[#2F2C2B] w-full justify-between" // Added justify-between
         onClick={() => setToggle(!toggle)}
       >
-        <h3 className="text-lg font-normal text-left">{question}</h3>
-        <span className="flex-shrink-0 text-md">
+        <h3 className="text-lg font-normal flex-grow truncate">{question}</h3>
+        <span className="ml-4 lg:shrink-0">
+          {" "}
+          {/* Adjusted margin */}
           {toggle ? <FaMinus /> : <FaPlus />}
         </span>
       </div>
-      {toggle && <p className="mt-3 text-gray-600 text-left">{answer}</p>}
+      {toggle && <p className="mt-4 text-gray-600 text-left">{answer}</p>}
     </div>
   );
 };
@@ -67,16 +68,16 @@ const Accordiann = () => {
   const visibleFAQs = showAll ? faqs : faqs.slice(0, 4);
 
   return (
-    <motion.div
-      className="mt-12 px-4 max-w-4xl font-display mx-auto text-center"
-      variants={fadeIn("right", 0)}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: false, amount: 0.7 }}
-    >
+    <div className=" max-w-8xl bg-white mt-3  sm:max-w-8xl  font-display mx-auto text-center">
       <h3 className="text-5xl font-normal mb-10">FAQ</h3>
 
-      <div className="flex flex-col ">
+      <motion.div
+        className="flex flex-col items-between lg:px-1   text-left"
+        variants={fadeIn("up", 0.2)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.7 }}
+      >
         {visibleFAQs.map((faq, index) => (
           <AccordionItem
             key={index}
@@ -84,17 +85,17 @@ const Accordiann = () => {
             answer={faq.answer}
           />
         ))}
-      </div>
+      </motion.div>
 
-      {faqs.length > 4 && (
+      {faqs.length > 3 && (
         <button
-          className="mt-6 px-6 py-2 rounded-full cursor-pointer bg-black text-white font-semibold hover:bg-white hover:text-black transition-all"
+          className="mt-6 px-6 py-2 rounded-full cursor-pointer bg-[#2F2C2B] text-white font-semibold hover:bg-white hover:text-[#2F2C2B] transition-all"
           onClick={() => setShowAll(!showAll)}
         >
           {showAll ? "Show Less" : "Show More"}
         </button>
       )}
-    </motion.div>
+    </div>
   );
 };
 

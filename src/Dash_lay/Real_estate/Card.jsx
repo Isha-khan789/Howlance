@@ -10,7 +10,7 @@ const Card = () => {
       pricing: "$800",
 
       features: [
-        "10 exclusive homeowner or commercial  leads",
+        "10 exclusive leads",
         "Verified buyer and seller connections",
         "Location and budget targeting",
       ],
@@ -20,7 +20,7 @@ const Card = () => {
       pricing: "$1,500",
 
       features: [
-        "18 exclusive homeowner or commercial leads",
+        "20 exclusive leads",
         "Property insights and analytics",
         "Increased closing opportunities",
         "Time-saving prospecting tools",
@@ -31,7 +31,7 @@ const Card = () => {
       pricing: "$3,000 + 5% Deal Success",
 
       features: [
-        "30 mixed leads (buyers, sellers, homeowners, commercial)",
+        "30 exclusive leads ",
         "Advanced data-driven analytics",
         "Dedicated account manager",
         "Unlimited targeting & market insights",
@@ -45,7 +45,7 @@ const Card = () => {
       title: "Starter",
       pricing: "$1,000",
       features: [
-        "20 off-market property leads",
+        "20 exclusive leads",
         "Verified seller connections",
         "Location and budget targeting",
         "Property insights",
@@ -55,7 +55,7 @@ const Card = () => {
       title: "Growth",
       pricing: "$2,500",
       features: [
-        "36 property opportunities",
+        "36 exclusive leads",
         "Data-driven ROI insights",
         "Subscription-based lead flow",
         "Access to serious sellers",
@@ -65,7 +65,7 @@ const Card = () => {
       title: "Elite",
       pricing: "$5,000  + 5% Deal Success",
       features: [
-        "60 mixed leads (sellers, homeowners, buyers)",
+        "60 exclusive leads",
         "High-ROI investment opportunities",
         "Advanced analytics dashboard",
         "Dedicated account manager",
@@ -82,7 +82,7 @@ const Card = () => {
           Your Pipeline. Your Profit. No Risk.
         </h3>
         <p className="font-display text-md max-w-3xl text-center  p-3 mt-1">
-          We handle the hard part—finding & verifying real buyers and sellers.
+          We handle the hard part finding & verifying real buyers and sellers.
           You focus on closing. Plus, enjoy instant replacements and a
           guaranteed refund policy under our subscription plans.
         </p>
@@ -93,8 +93,8 @@ const Card = () => {
             onClick={() => setActiveTab("Realtors")}
             className={`px-6 py-2 rounded-full font-medium transition ${
               activeTab === "Realtors"
-                ? "bg-black text-white"
-                : "text-black hover:bg-gray-700"
+                ? "bg-[#2F2C2B] text-white"
+                : "text-[#2F2C2B] hover:bg-gray-700"
             }`}
           >
             3 Months
@@ -103,8 +103,8 @@ const Card = () => {
             onClick={() => setActiveTab("Investors")}
             className={`px-6 py-2 rounded-full font-medium transition ${
               activeTab === "Investors"
-                ? "bg-black text-white"
-                : "text-black hover:bg-gray-300"
+                ? "bg-[#2F2C2B] text-white"
+                : "text-[#2F2C2B] hover:bg-gray-300"
             }`}
           >
             6 Months
@@ -116,10 +116,12 @@ const Card = () => {
             <div
               key={index}
               className={`rounded-2xl shadow-lg text-left p-8 flex flex-col items-center  transition ${
-                plan.highlight ? "bg-black text-white scale-105" : "bg-white"
+                plan.highlight
+                  ? "bg-[#2F2C2B] text-white scale-105"
+                  : "bg-white"
               }`}
             >
-              <h3 className="text-xl font-semibold mb-4 whitespace-nowrap">
+              <h3 className="text-xl font-semibold mb-4 lg:whitespace-nowrap md:text-md sm:text-base">
                 {plan.title} | {plan.pricing}
               </h3>
 
@@ -134,14 +136,22 @@ const Card = () => {
                   </li>
                 ))}
               </ul>
-              <button
+              {/* <button
                 className={`px-6 py-2 rounded-full font-semibold transition ${
                   plan.title === "Starter" ? "mt-28" : "mt-18"
                 } ${
                   plan.highlight
-                    ? "bg-white text-black hover:bg-gray-200"
+                    ? "bg-white text-[#2F2C2B] hover:bg-gray-200"
                     : "bg-gray-200 hover:bg-gray-300"
                 }`}
+              >
+                Buy Plan
+              </button> */}
+              <button
+                className={`px-5 py-1 rounded-full font-semibold transition ${
+                  plan.title === "Starter" ? " mt-30" : "mt-20"
+                }
+  bg-white text-[#2F2C2B] hover:bg-gray-200 mt-20`}
               >
                 Buy Plan
               </button>
